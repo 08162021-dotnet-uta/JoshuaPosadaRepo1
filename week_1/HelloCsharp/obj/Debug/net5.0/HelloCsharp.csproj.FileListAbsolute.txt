@@ -1,0 +1,16 @@
+/home/joshua/revature/fred_repo/week_1/HelloCsharp/bin/Debug/net5.0/HelloCsharp
+/home/joshua/revature/fred_repo/week_1/HelloCsharp/bin/Debug/net5.0/HelloCsharp.deps.json
+/home/joshua/revature/fred_repo/week_1/HelloCsharp/bin/Debug/net5.0/HelloCsharp.runtimeconfig.json
+/home/joshua/revature/fred_repo/week_1/HelloCsharp/bin/Debug/net5.0/HelloCsharp.runtimeconfig.dev.json
+/home/joshua/revature/fred_repo/week_1/HelloCsharp/bin/Debug/net5.0/HelloCsharp.dll
+/home/joshua/revature/fred_repo/week_1/HelloCsharp/bin/Debug/net5.0/ref/HelloCsharp.dll
+/home/joshua/revature/fred_repo/week_1/HelloCsharp/bin/Debug/net5.0/HelloCsharp.pdb
+/home/joshua/revature/fred_repo/week_1/HelloCsharp/obj/Debug/net5.0/HelloCsharp.csproj.AssemblyReference.cache
+/home/joshua/revature/fred_repo/week_1/HelloCsharp/obj/Debug/net5.0/HelloCsharp.GeneratedMSBuildEditorConfig.editorconfig
+/home/joshua/revature/fred_repo/week_1/HelloCsharp/obj/Debug/net5.0/HelloCsharp.AssemblyInfoInputs.cache
+/home/joshua/revature/fred_repo/week_1/HelloCsharp/obj/Debug/net5.0/HelloCsharp.AssemblyInfo.cs
+/home/joshua/revature/fred_repo/week_1/HelloCsharp/obj/Debug/net5.0/HelloCsharp.csproj.CoreCompileInputs.cache
+/home/joshua/revature/fred_repo/week_1/HelloCsharp/obj/Debug/net5.0/HelloCsharp.dll
+/home/joshua/revature/fred_repo/week_1/HelloCsharp/obj/Debug/net5.0/ref/HelloCsharp.dll
+/home/joshua/revature/fred_repo/week_1/HelloCsharp/obj/Debug/net5.0/HelloCsharp.pdb
+/home/joshua/revature/fred_repo/week_1/HelloCsharp/obj/Debug/net5.0/HelloCsharp.genruntimeconfig.cache
