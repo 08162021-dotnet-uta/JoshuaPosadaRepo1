@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfStore xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Store xsi:type="GroceryStore">
+    <Name>Grocery Store</Name>
+    <ProductCollection>
+      <Product>
+        <Name>Milk</Name>
+        <Price>2.33</Price>
+        <Store xsi:type="GroceryStore">
+          <Name>Grocery Store</Name>
+          <Orders />
+          <ProductCollection />
+        </Store>
+      </Product>
+      <Product>
+        <Name>Coke</Name>
+        <Price>1</Price>
+        <Store xsi:type="GroceryStore">
+          <Name>Grocery Store</Name>
+          <Orders />
+          <ProductCollection />
+        </Store>
+      </Product>
+      <Product>
+        <Name>Sugar</Name>
+        <Price>0.45</Price>
+        <Store xsi:type="GroceryStore">
+          <Name>Grocery Store</Name>
+          <Orders />
+          <ProductCollection />
+        </Store>
+      </Product>
+    </ProductCollection>
+  </Store>
+  <Store xsi:type="AthleticStore">
+    <Name>Athletic Store</Name>
+    <ProductCollection>
+      <Product>
+        <Name>Tennis Ball</Name>
+        <Price>5</Price>
+        <Store xsi:type="AthleticStore">
+          <Name>Athletic Store</Name>
+          <Orders />
+          <ProductCollection />
+        </Store>
+      </Product>
+      <Product>
+        <Name>Racket</Name>
+        <Price>25</Price>
+        <Store xsi:type="AthleticStore">
+          <Name>Athletic Store</Name>
+          <Orders />
+          <ProductCollection />
+        </Store>
+      </Product>
+      <Product>
+        <Name>Shoes</Name>
+        <Price>55</Price>
+        <Store xsi:type="AthleticStore">
+          <Name>Athletic Store</Name>
+          <Orders />
+          <ProductCollection />
+        </Store>
+      </Product>
+    </ProductCollection>
+  </Store>
+  <Store xsi:type="OnlineStore">
+    <Name>Online Store</Name>
+    <ProductCollection>
+      <Product>
+        <Name>Computer</Name>
+        <Price>1000</Price>
+        <Store xsi:type="OnlineStore">
+          <Name>Online Store</Name>
+          <Orders />
+          <ProductCollection />
+        </Store>
+      </Product>
+      <Product>
+        <Name>Laptop</Name>
+        <Price>500</Price>
+        <Store xsi:type="OnlineStore">
+          <Name>Online Store</Name>
+          <Orders />
+          <ProductCollection />
+        </Store>
+      </Product>
+      <Product>
+        <Name>Keyboard</Name>
+        <Price>110</Price>
+        <Store xsi:type="OnlineStore">
+          <Name>Online Store</Name>
+          <Orders />
+          <ProductCollection />
+        </Store>
+      </Product>
+    </ProductCollection>
+  </Store>
+</ArrayOfStore>

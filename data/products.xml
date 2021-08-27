@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfProduct xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Product>
+    <Name>Milk</Name>
+    <Price>2.33</Price>
+    <Store xsi:type="GroceryStore">
+      <Name>Grocery Store</Name>
+    </Store>
+  </Product>
+  <Product>
+    <Name>Coke</Name>
+    <Price>1</Price>
+    <Store xsi:type="GroceryStore">
+      <Name>Grocery Store</Name>
+    </Store>
+  </Product>
+  <Product>
+    <Name>Sugar</Name>
+    <Price>0.45</Price>
+    <Store xsi:type="GroceryStore">
+      <Name>Grocery Store</Name>
+    </Store>
+  </Product>
+  <Product>
+    <Name>Tennis Ball</Name>
+    <Price>5</Price>
+    <Store xsi:type="AthleticStore">
+      <Name>Athletic Store</Name>
+    </Store>
+  </Product>
+  <Product>
+    <Name>Racket</Name>
+    <Price>25</Price>
+    <Store xsi:type="AthleticStore">
+      <Name>Athletic Store</Name>
+    </Store>
+  </Product>
+  <Product>
+    <Name>Shoes</Name>
+    <Price>55</Price>
+    <Store xsi:type="AthleticStore">
+      <Name>Athletic Store</Name>
+    </Store>
+  </Product>
+  <Product>
+    <Name>Computer</Name>
+    <Price>1000</Price>
+    <Store xsi:type="OnlineStore">
+      <Name>Online Store</Name>
+    </Store>
+  </Product>
+  <Product>
+    <Name>Laptop</Name>
+    <Price>500</Price>
+    <Store xsi:type="OnlineStore">
+      <Name>Online Store</Name>
+    </Store>
+  </Product>
+  <Product>
+    <Name>Keyboard</Name>
+    <Price>110</Price>
+    <Store xsi:type="OnlineStore">
+      <Name>Online Store</Name>
+    </Store>
+  </Product>
+</ArrayOfProduct>
