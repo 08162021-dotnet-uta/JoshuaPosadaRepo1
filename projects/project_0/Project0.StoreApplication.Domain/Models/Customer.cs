@@ -17,5 +17,8 @@ namespace Project0.StoreApplication.Domain.Models
     {
       return $"{Name} has {Orders.Count} Orders so far";
     }
+
+
+
   }
 }

@@ -39,7 +39,10 @@ namespace Project0.StoreApplication.Client.Singletons
       Stores = _storeRepository.Select();
 
     }
-
-
+    public void Add2(Store Store)
+    {
+      _storeRepository.Insert(Store);
+      Stores = _storeRepository.Select();
+    }
   }
 }

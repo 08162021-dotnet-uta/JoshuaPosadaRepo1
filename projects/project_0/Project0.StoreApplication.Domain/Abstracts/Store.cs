@@ -14,6 +14,14 @@ namespace Project0.StoreApplication.Domain.Abstracts
 
     public List<Product> ProductCollection { get; set; }
 
+    public void AddOrder(Order Order)
+    {
+      if (Order != null)
+        Orders.Add(Order);
+
+    }
+
+
     public override string ToString()
     {
       return Name;// ?? DateTime.Now.ToLongDateString();

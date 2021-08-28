@@ -1,27 +1,33 @@
 using Project0.StoreApplication.Domain.Abstracts;
 using System.Collections.Generic;
+using System;
 namespace Project0.StoreApplication.Domain.Models
 
 {
   public class Order
   {
-    //public List<Order> order;
     public Customer Customer { get; set; }
     public Product Product { get; set; }
     public Store Store { get; set; }
 
-    // public Order(Customer customer, Product product, Store store)
-    // {
-    //   Customer
-    //   Product
-    // }
-
-
     public override string ToString()
     {
       return $"{Store}- {Product.Name}";
-      //return $"{Customer} Ord {Product.Name} Product so far";
     }
+
+    public string pastOrders(List<Order> orders)
+    {
+      double cost = 0;
+      string pastorder = "";
+      foreach (var x in orders)
+      {
+        pastorder += x.Product + "- " + x.Product.Price + "\n";
+        cost += x.Product.Price;
+      }
+      pastorder += "-------------------\n " + "$" + Math.Round(cost, 2);
+      return pastorder;
+    }
+
     // public void SetOrder(List<string> pro, Store sto)
     // {
     //   order = new List<Order>() { pro, sto };

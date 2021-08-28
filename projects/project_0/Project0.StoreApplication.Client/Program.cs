@@ -18,7 +18,7 @@ namespace Project0.StoreApplication.Client
     private static readonly OrderSingleton _orderSingleton = OrderSingleton.Instance;
     private static readonly StoreSingleton _storeSingleton = StoreSingleton.Instance;
     private static readonly ProductSingleton _productSingleton = ProductSingleton.Instance;
-    static List<string> MainMenu = new List<string>() { "Pick a Store", "View Cart", "Add", "Delete", "Purchase", "View Past Orders", "Logout" };
+    static List<string> MainMenu = new List<string>() { "Pick a Store", "View Cart", "Add", "Delete", "Purchase", "View Past Orders", "Logout", "View Store Orders" };
     private const string _logfilePath = @"/home/joshua/revature/fred_repo/data/logs.xml";
 
     /// <summary>
@@ -28,8 +28,13 @@ namespace Project0.StoreApplication.Client
     static void Main(string[] args)
     {
       Log.Logger = new LoggerConfiguration().WriteTo.File(_logfilePath).CreateLogger();
-      Run(); 
+      Run();
     }
+
+    /// <summary>
+    /// Lets User choose through a menu and performs method for each fo the following
+    /// "Pick a Store", "View Cart", "Add", "Delete", "Purchase", "View Past Orders", "Logout", "View Store Orders" 
+    /// </summary>
     private static void Run()
     {
       //customers
@@ -37,12 +42,12 @@ namespace Project0.StoreApplication.Client
       {
         _customerSingleton.Add(new Customer());
       }
-      // Output<Customer>(_customerSingleton.Customers);
       var customer = _customerSingleton.Customers[Capture<Customer>(_customerSingleton.Customers)];
+
+      //Menu Elements
       int menu_choice;
       bool notLoggedout = true;
-      Order singleOrder = new Order();
-      //Purchases bye = new Purchases();
+
 
       while (notLoggedout)
       {
@@ -51,91 +56,91 @@ namespace Project0.StoreApplication.Client
         switch (menu_choice)
         {
           case 0:
+            Log.Information("switch Case Store/Product/Orders");
             //stores
             var store = _storeSingleton.Stores[Capture<Store>(_storeSingleton.Stores)];
-            //Output<Store>(_storeSingleton.Stores);
+
             //products
             if (_productSingleton.allProducts.Count == 0)
             {
               _productSingleton.Add(new Product());
             }
             _productSingleton.setStore(store);
-            //Output<Product>(_productSingleton.Products);// has to get the list of products in collection
             var product = _productSingleton.Products[Capture<Product>(_productSingleton.Products)];
-            singleOrder.Customer = customer;
-            singleOrder.Product = product;
-            singleOrder.Store = store;
 
-            _orderSingleton.Add(singleOrder);
-
-            // customer.Orders.Add(singleOrder); // these are not updating with orders right now
-            // store.Orders.Add(singleOrder); //
-
-            Console.WriteLine(singleOrder.Customer);
-            //Console.WriteLine(hi.Product);
-            // Console.WriteLine(hi.Store);
+            //Orders
+            _orderSingleton.Add(new Order() { Customer = customer, Product = product, Store = store });
             break;
 
           case 1:
+            Log.Information("switch Case Cart");
             Console.WriteLine("***CART***");
             Output<Order>(_orderSingleton.Orders);
             Console.WriteLine("***END CART***");
             break;
 
           case 2:
+            Log.Information("switch Case Edit:Add Item To cart");
             Console.WriteLine("Add");
             _orderSingleton.Add(_orderSingleton.Orders[Capture<Order>(_orderSingleton.Orders)]);
-
-
             break;
 
           case 3:
+            Log.Information("switch Case Delete Item");
             Console.WriteLine("Delete");
-            List<Order> hello = new List<Order>();
-            _orderSingleton.Orders.Remove(_orderSingleton.Orders[Capture<Order>(_orderSingleton.Orders)]);
-            hello = _orderSingleton.Orders;
-             Output<Order>(_orderSingleton.Orders);
-             _orderSingleton.Orders.Clear(); //Delete
-           // Output<Order>(_orderSingleton.Orders);
-            //Capture<Order>(hello);
-            int t = 0;
-            foreach (var x in hello)
-            {
-              _orderSingleton.Orders.Insert(t++, x);
-            }
+            _orderSingleton.Orders.RemoveAt(Capture<Order>(_orderSingleton.Orders));
             break;
 
           case 4:
+            Log.Information("switch Case Purchase");
             Console.WriteLine("Purchase");
-            double cost = 0;
-            //Show price
+            //Shows Price
+            if (_orderSingleton.Orders.Count > 0)
+              _orderSingleton.Orders[0].pastOrders(_orderSingleton.Orders);
+
             foreach (var x in _orderSingleton.Orders)
             {
-              cost += x.Product.Price;
-               Console.WriteLine(x.Product +" " +x.Product.Price);
+              Log.Information("Purchase: Add Customer Order");
+              customer.Orders.Add(x);
+              _customerSingleton.Add(customer);
+
+              for (int i = 0; i < _storeSingleton.Stores.Count; i++)
+              {
+                if (x.Store.Name.Equals(_storeSingleton.Stores[i].Name))
+                {
+                  Log.Information("Purchase: Add Store Order");
+                  _storeSingleton.Stores[i].AddOrder(x);
+                  //_storeSingleton.Add(x.Store);
+                }
+              }
+              Console.WriteLine(x.Product);
             }
-            //Store data as purchase 
+            _orderSingleton.Delete();
 
-            //delete all occurences of order
-            Console.WriteLine($"Thanks for purchasing! Your cost is $ {cost}");
-            _orderSingleton.Orders.Clear();//RemoveAll();
-
-
-            //  notLoggedout = false;
             break;
 
           case 5:
+            Log.Information("switch Case View Past Purchases");
             Console.WriteLine("View Past Purchases");
-            notLoggedout = false;
+            if (customer.Orders.Count > 0)
+              Console.WriteLine(customer.Orders[0].pastOrders(customer.Orders));
             break;
 
-                      case 6:
+          case 6:
+            Log.Information("Logout");
             Console.WriteLine("Logout Successful!");
             notLoggedout = false;
             break;
 
-          default:
+          case 7:
+            Log.Information("switch Case View Store Orders");
+            Console.WriteLine("View Store Orders");
+            var store2 = _storeSingleton.Stores[Capture<Store>(_storeSingleton.Stores)];
+            Output<Order>(store2.Orders);
+            break;
 
+          default:
+            Log.Information($"switch Case Default {menu_choice + 1} is not an option");
             Console.WriteLine($"Please select a valid Menu Item. {menu_choice + 1} is not an option");
             break;
         }
@@ -148,15 +153,8 @@ namespace Project0.StoreApplication.Client
 
 
 
-       private static void Output<T>(List<T> data) where T : class
+    private static void Output<T>(List<T> data) where T : class
     {
-      // verbose
-      // debug
-      // info
-      // warn
-      // error
-      // fatal
-
       Log.Information($"method: Output <{typeof(T)}>"); //string interpolation
 
       var index = 0;

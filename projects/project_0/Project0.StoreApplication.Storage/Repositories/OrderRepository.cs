@@ -26,6 +26,13 @@ namespace Project0.StoreApplication.Storage.Repositories
     /// 
     /// </summary>
     /// <returns></returns>
+    /// 
+    public bool RemoveFrom(List<Order> order, int i)
+    {
+      order.Remove(order[i]);
+      _fileAdapter.WriteToFile<Order>(_path, order);
+      return true;
+    }
     public bool Delete()
     {
       _fileAdapter.WriteToFile<Order>(_path, new List<Order>());

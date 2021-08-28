@@ -9,6 +9,7 @@ namespace Project0.StoreApplication.Domain.Models
     {
       Name = "Athletic Store";
     }
+
     //public string Name { get; set; }
 
     // public override string ToString()

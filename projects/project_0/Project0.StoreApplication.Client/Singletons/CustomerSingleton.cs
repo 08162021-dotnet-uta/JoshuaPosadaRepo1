@@ -30,8 +30,6 @@ namespace Project0.StoreApplication.Client.Singletons
     }
     public void Add(Customer customer)
     {
-      //Customers.Add(customer);
-      //_customerRepository.Insert(customer);
       _customerRepository.Insert(customer);
       Customers = _customerRepository.Select();
 

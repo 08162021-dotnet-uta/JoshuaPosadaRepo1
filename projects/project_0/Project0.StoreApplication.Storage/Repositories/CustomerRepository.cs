@@ -39,11 +39,7 @@ namespace Project0.StoreApplication.Storage.Repositories
     /// 
     /// </summary>
     /// <returns></returns>
-    // public List<Customer> Select()
-    // {
-    //   return _fileAdapter.ReadFromFile<List<Customer>>(_path);
-    //   //throw new System.NotImplementedException();
-    // }
+
     public List<Customer> Select()
     {
       return _fileAdapter.ReadFromFile<Customer>(_path);
