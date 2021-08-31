@@ -12,7 +12,11 @@ namespace Project0.StoreApplication.Client.Singletons
     private static readonly CustomerRepository _customerRepository = new CustomerRepository();
     public List<Customer> Customers { get; private set; }
 
-
+    /// <summary>
+    ///  The Singleton's instance is stored in a static field. 
+    /// Instance Static Constructor that creates a new Instance
+    /// </summary>
+    /// <value></value>
     public static CustomerSingleton Instance
     {
       get
@@ -24,10 +28,18 @@ namespace Project0.StoreApplication.Client.Singletons
         return _customerSingleton;
       }
     }
+    /// <summary>
+    /// Stores list of customers into List<Customer> Customers
+    /// </summary>
     private CustomerSingleton()
     {
       Customers = _customerRepository.Select();
     }
+    /// <summary>
+    /// Inserts customer into repository
+    /// reads the list into List<Customer> Customers
+    /// </summary>
+    /// <param name="customer"></param>
     public void Add(Customer customer)
     {
       _customerRepository.Insert(customer);

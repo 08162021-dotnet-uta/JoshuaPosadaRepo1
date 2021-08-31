@@ -71,7 +71,6 @@ namespace Project0.StoreApplication.Storage.Repositories
       {
         if (x.Store.Name.Equals(store.Name))
         {
-          //System.Console.WriteLine(x.Store.Name);
           productforStore.Add(x);
         }
       }

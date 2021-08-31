@@ -12,6 +12,7 @@ namespace Project0.StoreApplication.Storage.Repositories
     //public List<Order> Orders2 { get; set; }
     public List<Product> Products { get; set; }
 
+
     private const string _path = @"/home/joshua/revature/fred_repo/data/orders.xml";
     private static readonly FileAdapter _fileAdapter = new FileAdapter();
 

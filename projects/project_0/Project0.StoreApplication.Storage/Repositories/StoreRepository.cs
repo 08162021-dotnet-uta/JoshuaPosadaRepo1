@@ -162,15 +162,21 @@ namespace Project0.StoreApplication.Storage.Repositories
     /// <returns></returns>
     public bool Insert(Store entry)
     {
-      _fileAdapter.WriteToFile<Store>(_path, new List<Store> { entry });
 
+      List<Store> stores = new List<Store>(Select());
+      stores.Add(entry);
+      _fileAdapter.WriteToFile<Store>(_path, stores);
       return true;
     }
+
+
 
     /// <summary>
     /// 
     /// </summary>
     /// <returns></returns>
+    /// 
+    /// 
     public List<Store> Select()
     {
       return _fileAdapter.ReadFromFile<Store>(_path);

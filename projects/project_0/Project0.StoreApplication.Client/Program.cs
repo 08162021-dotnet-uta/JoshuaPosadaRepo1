@@ -57,6 +57,10 @@ namespace Project0.StoreApplication.Client
         {
           case 0:
             Log.Information("switch Case Store/Product/Orders");
+            if (_storeSingleton.Stores.Count == 0)
+            {
+              _storeSingleton.Add(new GroceryStore());
+            }
             //stores
             var store = _storeSingleton.Stores[Capture<Store>(_storeSingleton.Stores)];
 
@@ -103,8 +107,8 @@ namespace Project0.StoreApplication.Client
               Log.Information("Purchase: Add Customer Order");
               customer.Orders.Add(x);
               _customerSingleton.Add(customer);
-
-              for (int i = 0; i < _storeSingleton.Stores.Count; i++)
+              int storelength = _storeSingleton.Stores.Count;
+              for (int i = 0; i < storelength; i++)
               {
                 if (x.Store.Name.Equals(_storeSingleton.Stores[i].Name))
                 {
@@ -135,7 +139,14 @@ namespace Project0.StoreApplication.Client
           case 7:
             Log.Information("switch Case View Store Orders");
             Console.WriteLine("View Store Orders");
+
             var store2 = _storeSingleton.Stores[Capture<Store>(_storeSingleton.Stores)];
+            // var store2 = Capture<Store>(_storeSingleton.Stores);
+            // if (_storeSingleton.Stores[store2].Orders.Count > 0)
+            // {
+            //   var newh = _storeSingleton.Stores[store2].Orders[0].pastOrders(_storeSingleton.Stores[store2].Orders);
+            //   Console.WriteLine(newh);
+            // }
             Output<Order>(store2.Orders);
             break;
 
@@ -152,7 +163,10 @@ namespace Project0.StoreApplication.Client
     }
 
 
-
+    /// <summary>
+    /// Takes a list of generic object's data and Writes to console index and data element
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     private static void Output<T>(List<T> data) where T : class
     {
       Log.Information($"method: Output <{typeof(T)}>"); //string interpolation
@@ -163,7 +177,11 @@ namespace Project0.StoreApplication.Client
         Console.WriteLine($"{++index} - {item}");
       }
     }
-    //    private static int Capture()
+    /// <summary>
+    /// Takes a list of generic object's data to pass into the Output Method and int parses a string input from console 
+    /// Returns Int  Index of List.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     private static int Capture<T>(List<T> data) where T : class
     {
       Log.Information("method Capture()");
