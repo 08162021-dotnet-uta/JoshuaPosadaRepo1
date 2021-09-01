@@ -40,14 +40,15 @@ namespace Project0.StoreApplication.Storage
       var file = new StreamReader(path);
       var xml = new XmlSerializer(typeof(List<T>));
       var result = xml.Deserialize(file) as List<T>;
-
-      return result;
+            file.Close();
+            return result;
     }
     public void WriteToFile<T>(string path, List<T> data) where T : class
     {
       var writer = new StreamWriter(path);
       var xml = new XmlSerializer(typeof(List<T>));
       xml.Serialize(writer, data);
+            writer.Close();
     }
     //public void WriteToFile(List<Store> stores)
     // public F WriteToFile<F>(string path, F data) where F : class

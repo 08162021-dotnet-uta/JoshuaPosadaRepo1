@@ -7,8 +7,9 @@ namespace Project0.StoreApplication.Domain.Abstracts
   [XmlInclude(typeof(AthleticStore))]
   [XmlInclude(typeof(GroceryStore))]
   [XmlInclude(typeof(OnlineStore))]
-  public abstract class Store
+  public class Store
   {
+        public int StoreId { get; set; }
     public string Name { get; set; }
     public List<Order> Orders { get; set; }
 

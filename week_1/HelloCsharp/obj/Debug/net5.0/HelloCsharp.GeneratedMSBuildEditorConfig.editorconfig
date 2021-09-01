@@ -7,4 +7,4 @@ build_property.PublishSingleFile =
 build_property.IncludeAllContentForSelfExtract = 
 build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
 build_property.RootNamespace = HelloCsharp
-build_property.ProjectDir = /home/joshua/revature/fred_repo/week_1/HelloCsharp/
+build_property.ProjectDir = C:\Users\joshu\Source\Repos\08162021-dotnet-uta\JoshuaPosadaRepo1\week_1\HelloCsharp\

@@ -19,7 +19,9 @@ namespace Project0.StoreApplication.Client
     private static readonly StoreSingleton _storeSingleton = StoreSingleton.Instance;
     private static readonly ProductSingleton _productSingleton = ProductSingleton.Instance;
     static List<string> MainMenu = new List<string>() { "Pick a Store", "View Cart", "Add", "Delete", "Purchase", "View Past Orders", "Logout", "View Store Orders" };
-    private const string _logfilePath = @"/home/joshua/revature/fred_repo/data/logs.xml";
+        //private const string _logfilePath = @"/home/joshua/revature/fred_repo/data/logs.xml";
+        private const string _logfilePath = @"C:\Users\joshu\source\repos\08162021-dotnet-uta\JoshuaPosadaRepo1\data\logs.xml";
+
 
     /// <summary>
     /// Defines the Main Method
@@ -42,14 +44,28 @@ namespace Project0.StoreApplication.Client
       {
         _customerSingleton.Add(new Customer());
       }
-      var customer = _customerSingleton.Customers[Capture<Customer>(_customerSingleton.Customers)];
+      var customernum = Capture<Customer>(_customerSingleton.Customers);
+      var customer = _customerSingleton.Customers[customernum];
 
       //Menu Elements
       int menu_choice;
       bool notLoggedout = true;
 
+            if (_storeSingleton.Stores.Count > 0)
+                foreach (var x in _customerSingleton.Customers[customernum].Orders)
+                {
+          
+                    int storelength = _storeSingleton.Stores.Count;
+                    for (int i = 0; i < storelength; i++)
+                    {
+                        if (x.Store.Name.Equals(_storeSingleton.Stores[i].Name))
+                        {
+                            _storeSingleton.Stores[i].AddOrder(x);
+                        }
+                    }
+                }
 
-      while (notLoggedout)
+         while (notLoggedout)
       {
         menu_choice = Capture<string>(MainMenu);
 

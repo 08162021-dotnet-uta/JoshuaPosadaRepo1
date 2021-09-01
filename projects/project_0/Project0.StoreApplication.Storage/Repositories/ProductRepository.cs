@@ -7,7 +7,8 @@ namespace Project0.StoreApplication.Storage.Repositories
 
   public class ProductRepository : IRepository<Product>
   {
-    private const string _path = @"/home/joshua/revature/fred_repo/data/products.xml";
+    //private const string _path = @"/home/joshua/revature/fred_repo/data/products.xml";
+    private const string _path=@"C:\Users\joshu\source\repos\08162021-dotnet-uta\JoshuaPosadaRepo1\data\products.xml";
     private static readonly FileAdapter _fileAdapter = new FileAdapter();
 
     public ProductRepository()

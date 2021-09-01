@@ -13,7 +13,8 @@ namespace Project0.StoreApplication.Storage.Repositories
     public List<Product> Products { get; set; }
 
 
-    private const string _path = @"/home/joshua/revature/fred_repo/data/orders.xml";
+   // private const string _path = @"/home/joshua/revature/fred_repo/data/orders.xml";
+    private const string _path=@"C:\Users\joshu\source\repos\08162021-dotnet-uta\JoshuaPosadaRepo1\data\orders.xml";
     private static readonly FileAdapter _fileAdapter = new FileAdapter();
 
     public OrderRepository()
