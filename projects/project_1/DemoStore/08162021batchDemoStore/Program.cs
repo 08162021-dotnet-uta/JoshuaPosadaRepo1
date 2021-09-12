@@ -1,0 +1,25 @@
+﻿using DemoStoreDbContext.Models;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace _08162021batchDemoStore
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            using(Demo_08162021batchContext context= new Demo_08162021batchContext())
+            {
+                //var customers = context.Customers.ToList();
+
+                List<Customer> customers = context.Customers.FromSqlRaw<Customer>("SELECT * FROM Customers").ToList();
+                foreach (var x in customers)
+                {
+                    Console.WriteLine($"The customer is {x.FirstName} {x.LastName}");
+                }
+            }
+        }
+    }
+}
