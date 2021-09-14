@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace DemoStoreDbContext.Models
+namespace Project1.ModelsLayer.EfModels
 {
     public partial class ItemizedOrder
     {

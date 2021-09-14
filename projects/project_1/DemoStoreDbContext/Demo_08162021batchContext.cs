@@ -1,10 +1,11 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Project1.ModelsLayer.EfModels;
 
 #nullable disable
 
-namespace DemoStoreDbContext.Models
+namespace Project1.StoreApplication.Storage.Models
 {
     public partial class Demo_08162021batchContext : DbContext
     {
@@ -27,8 +28,8 @@ namespace DemoStoreDbContext.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Demo_08162021batch;Trusted_Connection=True;");
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Demo_08162021batch3;Trusted_Connection=True;");
             }
         }
 
@@ -56,7 +57,7 @@ namespace DemoStoreDbContext.Models
             modelBuilder.Entity<ItemizedOrder>(entity =>
             {
                 entity.HasKey(e => e.ItemizedId)
-                    .HasName("PK__Itemized__AB3A49C5D178C899");
+                    .HasName("PK__Itemized__AB3A49C5F1E40C98");
 
                 entity.Property(e => e.ItemizedId).HasDefaultValueSql("(newid())");
 
@@ -106,7 +107,7 @@ namespace DemoStoreDbContext.Models
             modelBuilder.Entity<StoresProduct>(entity =>
             {
                 entity.HasKey(e => e.StoreProductId)
-                    .HasName("PK__StoresPr__629CD7480DAB8474");
+                    .HasName("PK__StoresPr__629CD7481D3C9F87");
 
                 entity.ToTable("StoresProduct");
 

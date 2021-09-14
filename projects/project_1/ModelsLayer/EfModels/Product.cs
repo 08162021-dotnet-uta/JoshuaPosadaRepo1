@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace DemoStoreDbContext.Models
+namespace Project1.ModelsLayer.EfModels
 {
     public partial class Product
     {
@@ -18,6 +18,7 @@ namespace DemoStoreDbContext.Models
         public string ProductDescription { get; set; }
         public decimal ProductPrice { get; set; }
         public string ProductPicture { get; set; }
+        public int ProductQuantity { get; set; }
 
         public virtual ICollection<ItemizedOrder> ItemizedOrders { get; set; }
         public virtual ICollection<StoresProduct> StoresProducts { get; set; }

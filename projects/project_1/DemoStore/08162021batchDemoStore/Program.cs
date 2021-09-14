@@ -1,5 +1,6 @@
-﻿using DemoStoreDbContext.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Project1.ModelsLayer.EfModels;
+using Project1.StoreApplication.Storage.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
