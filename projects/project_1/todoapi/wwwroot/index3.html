@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/site.css">
+</head>
+
+<body>
+	<button class="randombutton">Click me to see a string</button>
+	<button class="seeplayers" onclick="SeePlayers()">Click to see a list of the players</button>
+
+	<!--<button class="weatherlist">Click me to see the weather</button>-->
+	<div class="listofcustomers">	</div>
+	<br />
+
+
+		<h2>Modal Login Form</h2>
+
+		<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
+
+		<div id="id01" class="modal">
+
+			<form class="modal-content animate" action="/action_page.php" method="post">
+
+				<div class="container">
+					<label for="uname"><b>Username</b></label>
+					<input type="text" placeholder="Enter Username" name="uname" required>
+
+					<label for="psw"><b>Password</b></label>
+					<input type="password" placeholder="Enter Password" name="psw" required>
+
+					<button type="submit">Login</button>
+					<label>
+						<input type="checkbox" checked="checked" name="remember"> Remember me
+					</label>
+				</div>
+
+			</form>
+		</div>
+
+
+		<form name="myForm" action="/action_page.php" onsubmit="return validateForm()" method="post">
+			<label for="email">Email:</label><br>
+			<input type="text" id="email" name="fname"><br>
+			<label for="password">Password:</label><br>
+			<input type="text" id="passwoed" name="lname">
+			<input type="submit" value="Submit">
+		</form>
+
+		<script src="index.js"></script>
+	</body>
+
+</html>

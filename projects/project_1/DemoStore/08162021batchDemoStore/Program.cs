@@ -13,13 +13,19 @@ namespace _08162021batchDemoStore
         {
             using(Demo_08162021batchContext context= new Demo_08162021batchContext())
             {
-                //var customers = context.Customers.ToList();
+                //var customers = context.Customers.ToList();"Select * FROM Stores
 
-                List<Customer> customers = context.Customers.FromSqlRaw<Customer>("SELECT * FROM Customers").ToList();
-                foreach (var x in customers)
+                List<Store> stores = context.Stores.FromSqlRaw<Store>("Select * FROM Stores").ToList();
+                foreach (var x in stores)
                 {
-                    Console.WriteLine($"The customer is {x.FirstName} {x.LastName}");
+                    Console.WriteLine($"The customer is {x.StoreId} {x.StoreName}");
                 }
+
+                //List<Customer> customers = context.Customers.FromSqlRaw<Customer>("SELECT * FROM Customers").ToList();
+                //foreach (var x in customers)
+                //{
+                //    Console.WriteLine($"The customer is {x.FirstName} {x.LastName}");
+                //}
             }
         }
     }
