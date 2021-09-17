@@ -15,5 +15,9 @@ namespace DemoStoreBusinessLayer.Interfaces
 		Product ViewModelProductToProduct(ViewModelProduct c) { throw new NotImplementedException(); }
 		Store ViewModelStoreToStore (ViewModelsStore c) { throw new NotImplementedException(); }
 		ViewModelProduct ProductToViewModelProduct(Product c) { throw new NotImplementedException(); }
+		StoresProduct ViewModelStoreProductToProduct(ViewModelStoreProduct c) { throw new NotImplementedException(); }
+		ViewModelStoreProduct ProducttoViewModelStoreProduct(StoresProduct c) { throw new NotImplementedException(); }
+		ViewModelItemizedOrder itemizedOrdertoViewmodelItemizedOrder(ItemizedOrder c) { throw new NotImplementedException(); }
+		ItemizedOrder ViewItemizedOrdertoItemizedOrder(ViewModelItemizedOrder c) { throw new NotImplementedException(); }
 	}
 }

@@ -70,22 +70,22 @@ namespace Project1.StoreApplication.Storage.Controllers
             return customers1;
         }
         // GET: CustomerController/Details/5
-        [HttpGet("pastordersbystore/{Customerid}/{Storeid}")]
-        public async Task<List<ViewModelProduct>> Details(int customerid, int storeid)
+        [HttpGet("pastordersbystore/{customerid}/{storeid}")]
+        public async Task<List<ViewModelProduct>> DetailsPast(int customerid, int storeid)
         {
             // call the business layer method to return list of customers
             //List<ViewModelCustomer> customers = await 
             ViewModelCustomer c = new ViewModelCustomer() { CustomerId = customerid };
             ViewModelsStore s = new ViewModelsStore() { StoreId = storeid };
             //Store hi = new ViewModelStoreProduct();
-            Task<List<ViewModelProduct>> customers = _customerrepo.getPastOrdersAsync(c,s);
+            Task<List<ViewModelProduct>> productss = _customerrepo.getPastOrdersAsync(c,s);
             //do stuff
-            _logger.LogInformation("\n\nThere was a problem in the ViewModelProduct Details method.\n\n");
+            _logger.LogInformation("\n\nThere was a problem in the ViewModelProduct Detailspast method.\n\n");
 
             //do more stuff
 
-            List<ViewModelProduct> customers1 = await customers;
-            return customers1;
+            List<ViewModelProduct> products1 = await productss;
+            return products1;
         }
 
         //public ProductsController(Demo_08162021batchContext context)

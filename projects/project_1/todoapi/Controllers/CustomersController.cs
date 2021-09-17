@@ -22,14 +22,7 @@ namespace StoreDemoUi.Controllers
 			_customerrepo = cr;
 			_logger = logger;
 		}
-		// GET: CustomerController
-		[HttpGet]
-		public ActionResult Index()
-        {
-            //ViewModelCustomer obj = new ViewModelCustomer();
-            return View();
-
-        }
+		
 
         // GET: CustomerController/Details/5
         [HttpGet("Customerlist")]
@@ -46,7 +39,14 @@ namespace StoreDemoUi.Controllers
 			List<ViewModelCustomer> customers1 = await customers;
 			return customers1;
 		}
+		// GET: CustomerController
+		[HttpGet]
+		public ActionResult Index()
+		{
+			//ViewModelCustomer obj = new ViewModelCustomer();
+			return View();
 
+		}
 		// GET: CustomerController/Create - this is the route for conventional routing 
 		// Attribute routing involves using attributes to define the path
 		[HttpPut("customercreate/{id}")]

@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using _08162021batchDemoStore;
+using DemoStoreBusinessLayer.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Project1.ModelsLayer.EfModels;
 using Project1.StoreApplication.Storage.Models;
 
@@ -12,97 +15,117 @@ namespace Project1.StoreApplication.Storage.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ItemizedOrdersController : ControllerBase
+    public class ItemizedOrdersController : Controller
     {
-        private readonly Demo_08162021batchContext _context;
+		private readonly ICustomerRepository _customerrepo;
+		private readonly ILogger<ItemizedOrdersController> _logger;
 
-        public ItemizedOrdersController(Demo_08162021batchContext context)
-        {
-            _context = context;
-        }
+		public ItemizedOrdersController(ICustomerRepository cr, ILogger<ItemizedOrdersController> logger)
+		{
+			_customerrepo = cr;
+			_logger = logger;
+		}
 
-        // GET: api/ItemizedOrders
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<ItemizedOrder>>> GetItemizedOrders()
-        {
-            return await _context.ItemizedOrders.ToListAsync();
-        }
 
-        // GET: api/ItemizedOrders/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<ItemizedOrder>> GetItemizedOrder(Guid id)
-        {
-            var itemizedOrder = await _context.ItemizedOrders.FindAsync(id);
+		// GET: CustomerController
+		[HttpGet]
+		public ActionResult Index()
+		{
+			//ViewModelCustomer obj = new ViewModelCustomer();
+			return View();
 
-            if (itemizedOrder == null)
-            {
-                return NotFound();
-            }
+		}
+		// GET: CustomerController/Create - this is the route for conventional routing 
+		// Attribute routing involves using attributes to define the path
+		[HttpPut("customercreate/{id}")]
+		public ActionResult Create(int id)
+		{
+			return View();
+		}
 
-            return itemizedOrder;
-        }
+		// POST: CustomerController/Create
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public ActionResult Create(IFormCollection collection)
+		{
+			try
+			{
+				return RedirectToAction(nameof(Index));
+			}
+			catch
+			{
+				return View();
+			}
+		}
 
-        // PUT: api/ItemizedOrders/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutItemizedOrder(Guid id, ItemizedOrder itemizedOrder)
-        {
-            if (id != itemizedOrder.ItemizedId)
-            {
-                return BadRequest();
-            }
+		// GET: CustomerController/Edit/5
 
-            _context.Entry(itemizedOrder).State = EntityState.Modified;
+		[HttpPut("customerupdate/{id}")]
+		public ActionResult Edit(int id)
+		{
+			return View();
+		}
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ItemizedOrderExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
 
-            return NoContent();
-        }
+		[HttpPost("editidcollection")]
+		[ValidateAntiForgeryToken]
+		public ActionResult Edit(int id, IFormCollection collection)
+		{
+			try
+			{
+				return RedirectToAction(nameof(Index));
+			}
+			catch
+			{
+				return View();
+			}
+		}
 
-        // POST: api/ItemizedOrders
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<ItemizedOrder>> PostItemizedOrder(ItemizedOrder itemizedOrder)
-        {
-            _context.ItemizedOrders.Add(itemizedOrder);
-            await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetItemizedOrder", new { id = itemizedOrder.ItemizedId }, itemizedOrder);
-        }
 
-        // DELETE: api/ItemizedOrders/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteItemizedOrder(Guid id)
-        {
-            var itemizedOrder = await _context.ItemizedOrders.FindAsync(id);
-            if (itemizedOrder == null)
-            {
-                return NotFound();
-            }
+		// GET: CustomerController/Create - this is the route for conventional routing 
+		// Attribute routing involves using attributes to define the path
+		[HttpPost("addtostorecartIO")]
+		public async Task<ActionResult<ViewModelItemizedOrder>> Create(ViewModelItemizedOrder c)
+		{
+			Console.WriteLine(c);
+			if (!ModelState.IsValid) return BadRequest();
 
-            _context.ItemizedOrders.Remove(itemizedOrder);
-            await _context.SaveChangesAsync();
+			//ViewModelCustomer c = new ViewModelCustomer() { Fname = fname, Lname = lname };
+			//send fname and lname into a method of the business layer to check the Db fo that guy/gal;
+			ViewModelItemizedOrder c1 = await _customerrepo.addtoItemizedOrderCartAsync(c);
+			if (c1 == null)
+			{
+				return NotFound();
+			}
+			Console.WriteLine(c1);
 
-            return NoContent();
-        }
+			return Created($"~ItemizedOrder/{c1.ItemizedId}", c1);
+		}
 
-        private bool ItemizedOrderExists(Guid id)
-        {
-            return _context.ItemizedOrders.Any(e => e.ItemizedId == id);
-        }
-    }
+
+
+		// GET: CustomerController/Delete/5
+		[HttpGet("delete/{id}")]
+		public ActionResult Delete(int id)
+		{
+			return View();
+		}
+
+		// POST: CustomerController/Delete/5
+		[HttpPost("deleteidcollect")]
+		[ValidateAntiForgeryToken]
+		public ActionResult Delete(int id, IFormCollection collection)
+		{
+			try
+			{
+				return RedirectToAction(nameof(Index));
+			}
+			catch
+			{
+				return View();
+			}
+		}
+		
+	}
 }

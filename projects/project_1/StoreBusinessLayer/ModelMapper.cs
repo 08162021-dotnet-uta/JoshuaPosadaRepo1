@@ -44,6 +44,41 @@ namespace DemoStoreBusinessLayer
 		}
 
 		/// <summary>
+		/// This method takes a ViewModelCustomer and returns the mapping to a Customer
+		/// </summary>
+		/// <param name="c"></param>
+		/// <returns></returns>
+		public static ItemizedOrder ViewItemizedOrdertoItemizedOrder(ViewModelItemizedOrder c)
+		{
+			ItemizedOrder c1 = new ItemizedOrder();
+			c1.OrderDate = c.OrderDate;
+			c1.OrderId = c1.OrderId;
+			c1.ProductId = c.ProductId;
+			c1.StoreProductId = c.StoreProductId;
+			c1.ItemizedId = c.ItemizedId;
+			c1.CustomerId = c.CustomerId;
+
+			return c1;
+		}
+
+		/// <summary>
+		/// This method takes a ViewModelCustomer and returns the mapping to a Customer
+		/// </summary>
+		/// <param name="c"></param>
+		/// <returns></returns>
+		public static ViewModelItemizedOrder itemizedOrdertoViewmodelItemizedOrder(ItemizedOrder c)
+		{
+			ViewModelItemizedOrder c1 = new ViewModelItemizedOrder();
+			c1.OrderDate = c.OrderDate;
+			c1.OrderId = c1.OrderId;
+			c1.ProductId = c.ProductId;
+			c1.StoreProductId = c.StoreProductId;
+			c1.ItemizedId = c.ItemizedId;
+			c1.CustomerId = c.CustomerId;
+			return c1;
+		}
+
+		/// <summary>
 		/// This method takes a ViewModelProduct and returns the mapping to a Product
 		/// </summary>
 		/// <param name="c"></param>
@@ -56,7 +91,25 @@ namespace DemoStoreBusinessLayer
 			c1.ProductPrice = c.ProductPrice;
 			return c1;
 		}
-
+		public static StoresProduct ViewModelStoreProductToProduct(ViewModelStoreProduct c)
+		{
+			StoresProduct c1 = new StoresProduct();
+			c1.ProductId = c.ProductId;
+			//c1.StoreguidId = c.StoreguidId;
+			//c1.StoreProductId = c.StoreProductId;
+			c1.StoreId = c.StoreId;
+			return c1;
+		}
+		public static ViewModelStoreProduct ProducttoViewModelStoreProduct(StoresProduct c)
+		{
+			ViewModelStoreProduct c1 = new ViewModelStoreProduct();
+			c1.ProductId = c.ProductId;
+			//c1.StoreguidId = c.StoreguidId;
+			//c1.StoreProductId = c.StoreProductId;
+			c1.StoreId = c.StoreId;
+			return c1;
+		}
+	
 		/// <summary>
 		/// This method takes a Product and returns the mapping to a ViewModelProduct
 		/// </summary>

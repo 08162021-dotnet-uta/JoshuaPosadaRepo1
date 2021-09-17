@@ -31,3 +31,7 @@ function Login() {
 function Register() {
     location.href = "register.html";
 }
+
+function AddtoCart() {
+    location.href = "Cart.html";
+}

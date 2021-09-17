@@ -23,9 +23,7 @@
                         </div>
                         <!-- Product actions-->
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-     
-
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="ordersbyStorebyproductorders.html"><div id="${data[x].storeId}" onClick="sessionStorage.StoreId2=${data[x].storeId}">View Products</div></a></div>
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="storesorderhistory.html"><div id="${data[x].storeId}" onClick="sessionStorage.StoreId=${data[x].storeId}">View Products</div></a></div>
                              
                          </div>
                     </div>

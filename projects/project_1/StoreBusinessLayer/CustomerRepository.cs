@@ -59,6 +59,45 @@ namespace DemoStoreBusinessLayer
 			return await LoginCustomerAsync(vmc);
 		}
 
+
+		public async Task<ViewModelStoreProduct> addtoStoreCartAsync(ViewModelStoreProduct vmc)
+		{
+			StoresProduct c1 = ModelMapper.ViewModelStoreProductToProduct(vmc);
+
+
+			int c2 = await _context.Database.ExecuteSqlRawAsync("INSERT INTO StoresProduct(StoreguidId,StoreId,ProductId) VALUES ({0},{1},{2})", Guid.NewGuid(), c1.StoreId, c1.ProductId);// default is NULL
+
+			if (c2 != 1) return null;
+
+
+			StoresProduct c3 = await _context.StoresProducts.FromSqlRaw<StoresProduct>("SELECT * FROM  StoresProduct WHERE StoreId = {0} and ProductId = {1}", c1.StoreId, c1.StoreProductId).FirstOrDefaultAsync();// default is NULL
+
+			if (c3 == null) return null;
+
+			ViewModelStoreProduct c4 = ModelMapper.ProducttoViewModelStoreProduct(c3);
+			return c4;
+		}
+
+		public async Task<ViewModelItemizedOrder> addtoItemizedOrderCartAsync(ViewModelItemizedOrder vmc)
+		{
+			ItemizedOrder c1 = ModelMapper.ViewItemizedOrdertoItemizedOrder(vmc);
+			StoresProduct sp = await _context.StoresProducts.FromSqlRaw<StoresProduct>("SELECT MAX(StoreProductId) FROM  StoresProduct ").FirstOrDefaultAsync();// default is NULL
+
+			Guid obj = Guid.NewGuid();
+			int c2 = await _context.Database.ExecuteSqlRawAsync("INSERT INTO ItemizedOrders(OrderId, CustomerId, StoreProductId, ProductId, OrderDate) VALUES({ 0}, { 1}, { 2}, { 3}, { 4},{ 5})", obj, c1.CustomerId,sp.StoreProductId,c1.ProductId, c1.OrderDate);// default is NULL
+
+
+			if (c2 != 1) return null;
+
+
+			ItemizedOrder c3 = await _context.ItemizedOrders.FromSqlRaw<ItemizedOrder>("SELECT * FROM  ItemizedOrders WHERE CustomerId = {0} and StoreProductId = {1} and OrderId= {2}", c1.CustomerId, c1.StoreProductId, obj).FirstOrDefaultAsync();// default is NULL
+
+			if (c3 == null) return null;
+
+			ViewModelItemizedOrder c4 = ModelMapper.itemizedOrdertoViewmodelItemizedOrder(c3);
+			return c4;
+		}
+
 		/// <summary>
 		/// This method getss a list of all the products or a single product given an arg.
 		/// </summary>
@@ -115,8 +154,9 @@ namespace DemoStoreBusinessLayer
         {
 			Store c1 = ModelMapper.ViewModelsStoreToStore(vmc2);
 
-			List<Product> productss = await _context.Products.FromSqlRaw<Product>($"Select Products.ProductId, ProductName,ProductDescription,ProductPrice,ProductQuantity,ProductPicture from Products Join StoresProduct on Products.ProductId = StoresProduct.ProductId WHERE StoreId={ c1.StoreId}").ToListAsync();
-            List<ViewModelProduct> vmc = new List<ViewModelProduct>();
+			List<Product> productss = await _context.Products.FromSqlRaw<Product>($"Select Products.ProductId, ProductName,ProductDescription,ProductPrice,ProductQuantity,ProductPicture from Products Join StoresProduct on Products.ProductId = StoresProduct.ProductId WHERE StoreId={ c1.StoreId}").ToListAsync();///* AND StoreguidId = {Guid.Parse("2F472542-41C7-4F87-A5B3-717AFE821305")
+
+			List<ViewModelProduct> vmc = new List<ViewModelProduct>();
             foreach (Product c in productss)
             {
 
@@ -130,7 +170,22 @@ namespace DemoStoreBusinessLayer
 			Store c1 = ModelMapper.ViewModelsStoreToStore(vmcS);
 			Customer c2 = ModelMapper.ViewModelCustomerToCustomer(vmcC);
 
-			List<Product> productss = await _context.Products.FromSqlRaw<Product>($"Select ProductName, ProductDescription, ProductPrice, ProductQuantity, Customers.FirstName FROM ItemizedOrders Join StoresProduct on ItemizedOrders.ProductId = StoresProduct.ProductId JOIN Stores on Stores.StoreId = StoresProduct.StoreId JOIN Customers on ItemizedOrders.CustomerId=Customers.CustomerId JOIN Products on Products.ProductId=ItemizedOrders.ProductId Where Stores.StoreId= StoresProduct.StoreId AND Stores.StoreId=${vmcS.StoreId} AND Customers.CustomerId=${vmcC.CustomerId}").ToListAsync();
+			List<Product> productss = await _context.Products.FromSqlRaw<Product>($"Select Products.ProductName, Products.ProductDescription, Products.ProductPrice, Products.ProductQuantity,Products.ProductPicture,Products.ProductId FROM ItemizedOrders Join StoresProduct on ItemizedOrders.ProductId = StoresProduct.ProductId JOIN Stores on Stores.StoreId = StoresProduct.StoreId JOIN Customers on ItemizedOrders.CustomerId=Customers.CustomerId JOIN Products on Products.ProductId=ItemizedOrders.ProductId Where Stores.StoreId= StoresProduct.StoreId AND Stores.StoreId=${vmcS.StoreId} AND Customers.CustomerId=${vmcC.CustomerId}").ToListAsync();
+			List<ViewModelProduct> vmc = new List<ViewModelProduct>();
+			foreach (Product c in productss)
+			{
+
+				vmc.Add(ModelMapper.ProductToViewModelProduct(c));
+			}
+
+			return vmc;
+		}
+
+		public async Task<List<ViewModelProduct>> getPastOrdersStoreAsync( ViewModelsStore vmcS)
+		{
+			Store c1 = ModelMapper.ViewModelsStoreToStore(vmcS);
+	
+			List<Product> productss = await _context.Products.FromSqlRaw<Product>($"Select Products.ProductName, Products.ProductDescription, Products.ProductPrice, Products.ProductQuantity,Products.ProductPicture,Products.ProductId FROM ItemizedOrders Join StoresProduct on ItemizedOrders.ProductId = StoresProduct.ProductId JOIN Stores on Stores.StoreId = StoresProduct.StoreId JOIN Customers on ItemizedOrders.CustomerId=Customers.CustomerId JOIN Products on Products.ProductId=ItemizedOrders.ProductId Where Stores.StoreId= StoresProduct.StoreId AND Stores.StoreId=${vmcS.StoreId}").ToListAsync();
 			List<ViewModelProduct> vmc = new List<ViewModelProduct>();
 			foreach (Product c in productss)
 			{
@@ -142,8 +197,6 @@ namespace DemoStoreBusinessLayer
 		}
 
 
-
-	
 
 
 	}// EoC

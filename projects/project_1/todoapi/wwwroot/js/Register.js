@@ -5,7 +5,7 @@ registerform.addEventListener('submit', (e) => {
 	const fname = registerform.fname.value;
 	const lname = registerform.lname.value;
 	const email = registerform.email.value;
-	const userData = { CustomerId: 5, Fname: fname, Lname: lname, Email: email }
+	const userData = { CustomerId: -1, Fname: fname, Lname: lname, Email: email }
 
 	//GET fetch request
 	fetch('customer/register', {
