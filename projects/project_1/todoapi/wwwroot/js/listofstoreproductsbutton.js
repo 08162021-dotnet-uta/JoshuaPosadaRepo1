@@ -21,8 +21,8 @@ function addhandlestoreproducts() {
 					lop.innerHTML += `
 
 
-							<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-								<div class="text-center"><div class="btn btn-outline-dark mt-auto disabled "><div id="outofstock">Out of Stock</div></div></div>
+							<div class="card-footer p-4 pt-0 border-top-0 bg-transparent outofstock">
+								<div class="text-center outofstock"><div class="btn btn-outline-dark mt-auto disabled outofstock "><div id="outofstock">Out of Stock</div></div></div>
 
 
 							</div>`
@@ -35,8 +35,8 @@ function addhandlestoreproducts() {
 					lop.innerHTML += `
 			           
 			                    
-			                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                <div class="text-center"><a class="btn btn-outline-dark mt-auto  " href="Store.html"><div id="${data[x].productId}" onClick="sessionStorage.productid=${data[x].productId}">Add To Cart</div></a></div>
+			                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent outofstock">
+                <div class="text-center outofstock"><a class="btn btn-outline-dark mt-auto  " href="Store.html"><div id="${data[x].productId}" onClick="sessionStorage.productid=${data[x].productId}">Add To Cart</div></a></div>
 
 			               
 			             </div>`;

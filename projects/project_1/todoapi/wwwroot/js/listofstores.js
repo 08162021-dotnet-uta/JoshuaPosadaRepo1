@@ -8,8 +8,8 @@
             for (let x = 0; x < data.length; x++) {
                  
                 lop.innerHTML += `
-                <div class="col mb-5">
-                    <div class="card h-100">
+                <div class="col mb-5" onmouseover="sessionStorage.StoreId=${data[x].storeId}">
+                    <div class="card h-100" onmouseover="sessionStorage.setItem('storeName','${data[x].storeName}')">
                         <!-- Product image-->
                         <img class="card-img-top" src="assets/${data[x].storeId}.png" alt="..." />
                         <!-- Product details-->

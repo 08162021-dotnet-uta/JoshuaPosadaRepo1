@@ -61,8 +61,12 @@ function addhandlerorsomething() {
         //            console.log('Failed to fetch page: ', err);
         //        });
         //});
-   
-
+        var buttonclicked = event.target;
+        console.log(buttonclicked);
+        if (buttonclicked.classList.contains('outofstock')) {
+            console.log(true);
+            return;
+        }
         var n = sessionStorage.getItem('counter');
         if (n === null) {
             n = 1;

@@ -8,7 +8,7 @@
             for (let x = 0; x < data.length; x++) {
                  
                 lop.innerHTML += `
-                <div class="col mb-5">
+                <div class="col mb-5" onmouseover="sessionStorage.StoreId=${data[x].storeId}">
                     <div class="card h-100">
                         <!-- Product details-->
                         <div class="card-body p-4">
