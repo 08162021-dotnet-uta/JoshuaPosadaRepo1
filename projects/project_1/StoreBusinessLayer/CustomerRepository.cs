@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Project1.ModelsLayer.EfModels;
 using Project1.StoreApplication.Storage.Models;
 
+
 namespace DemoStoreBusinessLayer
 {
 	public class CustomerRepository : ICustomerRepository
@@ -84,13 +85,14 @@ namespace DemoStoreBusinessLayer
 			StoresProduct sp = await _context.StoresProducts.FromSqlRaw<StoresProduct>("SELECT MAX(StoreProductId) FROM  StoresProduct ").FirstOrDefaultAsync();// default is NULL
 
 			Guid obj = Guid.NewGuid();
+			Console.WriteLine(sp.StoreProductId);
 			int c2 = await _context.Database.ExecuteSqlRawAsync("INSERT INTO ItemizedOrders(OrderId, CustomerId, StoreProductId, ProductId, OrderDate) VALUES({ 0}, { 1}, { 2}, { 3}, { 4},{ 5})", obj, c1.CustomerId,sp.StoreProductId,c1.ProductId, c1.OrderDate);// default is NULL
 
 
 			if (c2 != 1) return null;
 
 
-			ItemizedOrder c3 = await _context.ItemizedOrders.FromSqlRaw<ItemizedOrder>("SELECT * FROM  ItemizedOrders WHERE CustomerId = {0} and StoreProductId = {1} and OrderId= {2}", c1.CustomerId, c1.StoreProductId, obj).FirstOrDefaultAsync();// default is NULL
+			ItemizedOrder c3 = await _context.ItemizedOrders.FromSqlRaw<ItemizedOrder>("SELECT * FROM  ItemizedOrders WHERE CustomerId = {0} and StoreProductId = {1} and OrderId= {2}", c1.CustomerId, sp.StoreProductId, obj).FirstOrDefaultAsync();// default is NULL
 
 			if (c3 == null) return null;
 
@@ -170,7 +172,7 @@ namespace DemoStoreBusinessLayer
 			Store c1 = ModelMapper.ViewModelsStoreToStore(vmcS);
 			Customer c2 = ModelMapper.ViewModelCustomerToCustomer(vmcC);
 
-			List<Product> productss = await _context.Products.FromSqlRaw<Product>($"Select Products.ProductName, Products.ProductDescription, Products.ProductPrice, Products.ProductQuantity,Products.ProductPicture,Products.ProductId FROM ItemizedOrders Join StoresProduct on ItemizedOrders.ProductId = StoresProduct.ProductId JOIN Stores on Stores.StoreId = StoresProduct.StoreId JOIN Customers on ItemizedOrders.CustomerId=Customers.CustomerId JOIN Products on Products.ProductId=ItemizedOrders.ProductId Where Stores.StoreId= StoresProduct.StoreId AND Stores.StoreId=${vmcS.StoreId} AND Customers.CustomerId=${vmcC.CustomerId}").ToListAsync();
+			List<Product> productss = await _context.Products.FromSqlRaw<Product>($"Select Products.ProductName, Products.ProductDescription, Products.ProductPrice, Products.ProductQuantity,Products.ProductPicture,Products.ProductId FROM ItemizedOrders Join StoresProduct on ItemizedOrders.ProductId = StoresProduct.ProductId JOIN Stores on Stores.StoreId = StoresProduct.StoreId JOIN Customers on ItemizedOrders.CustomerId=Customers.CustomerId JOIN Products on Products.ProductId=ItemizedOrders.ProductId Where Stores.StoreId= StoresProduct.StoreId AND Stores.StoreId={vmcS.StoreId} AND Customers.CustomerId={vmcC.CustomerId}").ToListAsync();
 			List<ViewModelProduct> vmc = new List<ViewModelProduct>();
 			foreach (Product c in productss)
 			{
@@ -181,19 +183,249 @@ namespace DemoStoreBusinessLayer
 			return vmc;
 		}
 
-		public async Task<List<ViewModelProduct>> getPastOrdersStoreAsync( ViewModelsStore vmcS)
+		public async Task<List<ViewModelAll>> getPastOrdersviewallAsync(ViewModelCustomer vmcC)
 		{
-			Store c1 = ModelMapper.ViewModelsStoreToStore(vmcS);
-	
-			List<Product> productss = await _context.Products.FromSqlRaw<Product>($"Select Products.ProductName, Products.ProductDescription, Products.ProductPrice, Products.ProductQuantity,Products.ProductPicture,Products.ProductId FROM ItemizedOrders Join StoresProduct on ItemizedOrders.ProductId = StoresProduct.ProductId JOIN Stores on Stores.StoreId = StoresProduct.StoreId JOIN Customers on ItemizedOrders.CustomerId=Customers.CustomerId JOIN Products on Products.ProductId=ItemizedOrders.ProductId Where Stores.StoreId= StoresProduct.StoreId AND Stores.StoreId=${vmcS.StoreId}").ToListAsync();
-			List<ViewModelProduct> vmc = new List<ViewModelProduct>();
-			foreach (Product c in productss)
+			//List<ViewModelAll> vmcVA = new List<ViewModelAll>();
+
+			//Customer c2 = ModelMapper.ViewModelCustomerToCustomer(vmcC);
+
+			//List<Product> productss = await _context.Products.FromSqlRaw<Product>($"Select Products.ProductName, Products.ProductDescription, Products.ProductPrice, Products.ProductQuantity,Products.ProductPicture,Products.ProductId FROM ItemizedOrders Join StoresProduct on ItemizedOrders.ProductId = StoresProduct.ProductId JOIN Stores on Stores.StoreId = StoresProduct.StoreId JOIN Customers on ItemizedOrders.CustomerId = Customers.CustomerId JOIN Products on Products.ProductId = ItemizedOrders.ProductId Where Stores.StoreId = StoresProduct.StoreId AND  Customers.CustomerId ={vmcC.CustomerId} Order by ItemizedOrders.OrderDate").ToListAsync();
+			//List<ItemizedOrder> itemizedOrdersss = await _context.ItemizedOrders.FromSqlRaw<ItemizedOrder>($"Select ItemizedOrders.OrderDate, ItemizedOrders.ItemizedId, ItemizedOrders.OrderId, ItemizedOrders.StoreProductId, ItemizedOrders.CustomerId, ItemizedOrders.ProductId FROM ItemizedOrders Join StoresProduct on ItemizedOrders.ProductId = StoresProduct.ProductId JOIN Stores on Stores.StoreId = StoresProduct.StoreId JOIN Customers on ItemizedOrders.CustomerId = Customers.CustomerId JOIN Products on Products.ProductId = ItemizedOrders.ProductId Where Stores.StoreId = StoresProduct.StoreId AND Customers.CustomerId = {vmcC.CustomerId} Order by ItemizedOrders.OrderDate").ToListAsync();
+			//List<Store> storesss = await _context.Stores.FromSqlRaw<Store>($"Select Stores.StoreName, Stores.StoreId FROM ItemizedOrders Join StoresProduct on ItemizedOrders.ProductId = StoresProduct.ProductId JOIN Stores on Stores.StoreId = StoresProduct.StoreId JOIN Customers on ItemizedOrders.CustomerId = Customers.CustomerId JOIN Products on Products.ProductId = ItemizedOrders.ProductId Where Stores.StoreId = StoresProduct.StoreId AND Customers.CustomerId = {vmcC.CustomerId} Order by ItemizedOrders.OrderDate").ToListAsync();
+
+			//List<ViewModelProduct> vmcC2 = new List<ViewModelProduct>();
+
+
+			//foreach (Product c in productss)
+			//{
+
+			//	vmcC2.Add(ModelMapper.ProductToViewModelProduct(c));
+
+			//}
+			//List<ViewModelItemizedOrder> vmcIO = new List<ViewModelItemizedOrder>();
+			//foreach (ItemizedOrder c in itemizedOrdersss)
+			//{
+
+			//	vmcIO.Add(ModelMapper.itemizedOrdertoViewmodelItemizedOrder(c));
+			//}
+			//List<ViewModelsStore> vmcS = new List<ViewModelsStore>();
+			//foreach (Store c in storesss)
+			//{
+
+			//	vmcS.Add(ModelMapper.StoreToViewModelStore(c));
+			//}
+
+
+			//ViewModelAll hi2 = new ViewModelAll();
+			//hi2.getall = new Tuple<List<Product>, List<ItemizedOrder>, List<Store>>(productss, itemizedOrdersss, storesss);
+
+			//return hi2;
+
+			ViewModelAll hi = new ViewModelAll();
+			List<ViewModelAll> hiList = new List<ViewModelAll>();
+			using (Demo_08162021batchContext db = new Demo_08162021batchContext())
+			{
+				var mcsa = 
+				(from e in db.ItemizedOrders
+				 join p in db.StoresProducts
+				 on e.ProductId equals p.ProductId
+				 join s in db.Stores
+				 on p.StoreId equals s.StoreId
+				 join c in db.Customers
+				 on e.CustomerId equals c.CustomerId
+				 join pro in db.Products
+				 on e.ProductId equals pro.ProductId
+				 where c.CustomerId == vmcC.CustomerId
+				 orderby e.OrderDate ascending
+				 select new
+				 {
+					 ProductName = pro.ProductName,
+					 ProductDescription = pro.ProductDescription,
+					 ProductPrice = pro.ProductPrice,
+					 ProductQuantity = pro.ProductQuantity,
+					 ProductId = pro.ProductId,
+					 OrderDate = e.OrderDate,
+					 OrderId = e.OrderId,
+					 StoreProductId = e.StoreProductId,
+					 Customerid = e.CustomerId,
+					 StoreName = s.StoreName
+					 
+				 }).ToListAsync();
+
+				foreach (var p in await mcsa)
+				{
+					//Console.WriteLine(p.ProductPrice);
+					hi = new ViewModelAll();
+					hi.ProductName = p.ProductName;
+					hi.ProductDescription = p.ProductDescription;
+					hi.ProductPrice = p.ProductPrice;
+					hi.ProductQuantity = p.ProductQuantity;
+					hi.ProductId = p.ProductId;
+					hi.OrderDate = p.OrderDate;
+					hi.OrderId = p.OrderId;
+					hi.StoreProductId = p.StoreProductId;
+					hi.CustomerId = p.Customerid;
+					hi.StoreName = p.StoreName;
+					hiList.Add(hi);
+				}
+			}
+			return hiList;
+		}
+            //using (Demo_08162021batchContext db = new Demo_08162021batchContext())
+            //{
+
+            //    var mcsa =
+            //        (from e in db.ItemizedOrders
+            //         join p in db.StoresProducts
+            //         on e.ProductId equals p.ProductId
+            //         join s in db.Stores
+            //         on p.StoreId equals s.StoreId
+            //         join c in db.Customers
+            //         on e.CustomerId equals c.CustomerId
+            //         join pro in db.Products
+            //         on e.ProductId equals pro.ProductId
+            //         where p.StoreId == s.StoreId
+            //         & c.CustomerId == vmcC.CustomerId
+            //         orderby e.OrderDate
+            //         select new
+            //         {
+            //             ProductName = pro.ProductName,
+            //             ProductDescription = pro.ProductDescription,
+            //             ProductPrice = pro.ProductPrice,
+            //             ProductQuantity = pro.ProductQuantity,
+            //             ProductId = pro.ProductId,
+            //             OrderDate = e.OrderDate,
+            //             OrderId = e.OrderId,
+            //             StoreProductId = e.StoreProductId,
+            //             Customerid = e.CustomerId,
+            //             StoreName = s.StoreName
+            //         }).ToList();
+
+            //    foreach (var p in mcsa)
+            //    {
+            //        ProductName = p.ProductName;
+            //        ProductDescription = p.ProductDescription;
+            //        ProductPrice = p.ProductPrice;
+            //        ProductQuantity = p.ProductQuantity;
+            //        ProductId = p.ProductId;
+            //        OrderDate = p.OrderDate;
+            //        OrderId = p.OrderId;
+            //        StoreProductId = p.StoreProductId;
+            //        CustomerId = p.Customerid;
+            //        StoreName = p.StoreName;
+
+            //        //Console.WriteLine("{0} {1} {2} {3} {4}", p.ID, p.FirstName, p.MiddleName, p.LastName, p.Region);
+            //    }
+                //}
+                //foreach (var a in hi)
+                //{
+                //    hiL.add(a);
+
+                //         }
+
+                //         return List<hi>;
+
+
+                public List<Product> GetProduct(List<ViewModelProduct> vmcC2)
+		{
+			List<Product> products = new List<Product>();
+			foreach (ViewModelProduct c in vmcC2)
 			{
 
-				vmc.Add(ModelMapper.ProductToViewModelProduct(c));
+				products.Add(ModelMapper.ViewModelProductToProduct(c));
 			}
+			return products;
+		}
 
-			return vmc;
+		public List<Store> GetStore(List<ViewModelsStore> vmcS)
+		{
+			List<Store> Stores = new List<Store>();
+			foreach (ViewModelsStore c in vmcS)
+			{
+
+				Stores.Add(ModelMapper.ViewModelsStoreToStore(c));
+			}
+			return Stores;
+		}
+		public List<ItemizedOrder> GetItemizedOrders(List<ViewModelItemizedOrder> vmcIO)
+		{
+			List<ItemizedOrder> ItemizedOrders = new List<ItemizedOrder>();
+			foreach (ViewModelItemizedOrder c in vmcIO)
+			{
+
+				ItemizedOrders.Add(ModelMapper.ViewItemizedOrdertoItemizedOrder(c));
+			}
+			return ItemizedOrders;
+		}
+
+
+		public async Task<List<ViewModelAll>> getPastOrdersStoreAsync( ViewModelsStore vmcS)
+		{
+			Store c1 = ModelMapper.ViewModelsStoreToStore(vmcS);
+			ViewModelAll hi = new ViewModelAll();
+			List<ViewModelAll> hiList = new List<ViewModelAll>();
+			using (Demo_08162021batchContext db = new Demo_08162021batchContext())
+			{
+				var mcsa =
+				(from e in db.ItemizedOrders
+				 join p in db.StoresProducts
+				 on e.ProductId equals p.ProductId
+				 join s in db.Stores
+				 on p.StoreId equals s.StoreId
+				 join c in db.Customers
+				 on e.CustomerId equals c.CustomerId
+				 join pro in db.Products
+				 on e.ProductId equals pro.ProductId
+				 where s.StoreId == vmcS.StoreId
+				 orderby e.OrderDate ascending
+				 select new
+				 {
+					 ProductName = pro.ProductName,
+					 ProductDescription = pro.ProductDescription,
+					 ProductPrice = pro.ProductPrice,
+					 ProductQuantity = pro.ProductQuantity,
+					 ProductId = pro.ProductId,
+					 OrderDate = e.OrderDate,
+					 OrderId = e.OrderId,
+					 StoreProductId = e.StoreProductId,
+					 Customerid = e.CustomerId,
+					 StoreName = s.StoreName
+
+				 }).ToListAsync();
+
+				foreach (var p in await mcsa)
+				{
+					//Console.WriteLine(p.ProductPrice);
+					hi = new ViewModelAll();
+					hi.ProductName = p.ProductName;
+					hi.ProductDescription = p.ProductDescription;
+					hi.ProductPrice = p.ProductPrice;
+					hi.ProductQuantity = p.ProductQuantity;
+					hi.ProductId = p.ProductId;
+					hi.OrderDate = p.OrderDate;
+					hi.OrderId = p.OrderId;
+					hi.StoreProductId = p.StoreProductId;
+					hi.CustomerId = p.Customerid;
+					hi.StoreName = p.StoreName;
+					hiList.Add(hi);
+				}
+			}
+			return hiList;
+
+
+			//Store c1 = ModelMapper.ViewModelsStoreToStore(vmcS);
+			//Customer c2 = ModelMapper.ViewModelCustomerToCustomer(vmcC);
+			//Store c1 = ModelMapper.ViewModelsStoreToStore(vmcS);
+	
+			//List<Product> productss = await _context.Products.FromSqlRaw<Product>($"Select Products.ProductName, Products.ProductDescription, Products.ProductPrice, Products.ProductQuantity,Products.ProductPicture,Products.ProductId FROM ItemizedOrders Join StoresProduct on ItemizedOrders.ProductId = StoresProduct.ProductId JOIN Stores on Stores.StoreId = StoresProduct.StoreId JOIN Customers on ItemizedOrders.CustomerId=Customers.CustomerId JOIN Products on Products.ProductId=ItemizedOrders.ProductId Where Stores.StoreId= StoresProduct.StoreId AND Stores.StoreId=${vmcS.StoreId}").ToListAsync();
+			//List<ViewModelProduct> vmc = new List<ViewModelProduct>();
+			//foreach (Product c in productss)
+			//{
+
+			//	vmc.Add(ModelMapper.ProductToViewModelProduct(c));
+			//}
+
+			//return vmc;
 		}
 
 

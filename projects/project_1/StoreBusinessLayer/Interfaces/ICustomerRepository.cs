@@ -18,6 +18,7 @@ namespace DemoStoreBusinessLayer.Interfaces
 		Task<List<ViewModelsStore>> StoreListAsync();
 		Task<ViewModelStoreProduct> addtoStoreCartAsync(ViewModelStoreProduct vmc);
 		Task<ViewModelItemizedOrder> addtoItemizedOrderCartAsync(ViewModelItemizedOrder vmc);
-		Task<List<ViewModelProduct>> getPastOrdersStoreAsync(ViewModelsStore vmcS);
+		Task<List<ViewModelAll>> getPastOrdersStoreAsync(ViewModelsStore vmcS);
+		Task<List<ViewModelAll>> getPastOrdersviewallAsync(ViewModelCustomer vmcC);
 	}
 }

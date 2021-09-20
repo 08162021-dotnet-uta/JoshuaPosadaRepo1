@@ -45,29 +45,40 @@
             </div>
         </div>
     </nav>
-    <!-- Header-->
-    <header class="bg-dark py-5">
-        <div class="container px-4 px-lg-5 my-5">
-            <div class="text-center text-white">
-                <h1 class="display-4 fw-bolder">
-                    Welcome to your store app.
-                </h1>
-                <p class="lead fw-normal text-white-50 mb-0">Shop in style</p>
-            </div>
-        </div>
-    </header>
-    <!-- <button onclick="alert(sessionStorage.getItem('id'))">Check Session Value</button>-->
-    <!-- Section-->
-    <section class="py-5">
-        <div class="container px-4 px-lg-5 mt-5">
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center storepastorderPerstore">
-                <!--<div class="col mb-5 listofstores">
-                </div>-->
 
 
+
+    <div class="container">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h2>Order <b>Details</b></h2>
+                    </div>
+
+                </div>
             </div>
+
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Order #</th>
+                        <th>Store</th>
+                        <th>Order Date</th>
+                        <th>Product</th>
+                        <th>Product Description</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody class="storepastorderPerstore">
+                </tbody>
+            </table>
+
         </div>
-    </section>
+    </div>
+
+
+
 
     <!--<button onclick="alert(sessionStorage.getItem('id'))">Check Session Value</button>-->
     <!-- Footer-->

@@ -62,7 +62,7 @@ namespace Project1.StoreApplication.Storage.Controllers
             //Store hi = new ViewModelStoreProduct();
             Task<List<ViewModelProduct>> customers = _customerrepo.StoreProductListAsync(c);
             //do stuff
-            _logger.LogInformation("\n\nThere was a problem in the ViewModelProduct Details method.\n\n");
+            _logger.LogInformation("\n\nThere was a problem in the TASKViewModelProduct Details in Controller method.\n\n");
 
             //do more stuff
 

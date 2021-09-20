@@ -17,7 +17,7 @@ else {
 	newDiv.appendChild(newContent);
 	// add the newly created element and its content into the DOM
 	const currentDiv = document.getElementsByTagName("script");
-	document.body.insertBefore(newDiv, currentDiv[0]);
+	//document.body.insertBefore(newDiv, currentDiv[0]);
 
 	GetStoreList();
 }

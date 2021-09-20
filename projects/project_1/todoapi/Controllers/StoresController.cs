@@ -48,20 +48,20 @@ namespace Project1.StoreApplication.Storage.Controllers
 
         // GET: CustomerController/Details/5
         [HttpGet("/Stores/pastordersbystore/{storeid}")]
-        public async Task<List<ViewModelProduct>> DetailsPast( int storeid)
+        public async Task<List<ViewModelAll>> DetailsPast( int storeid)
         {
             // call the business layer method to return list of customers
             //List<ViewModelCustomer> customers = await 
      
             ViewModelsStore s = new ViewModelsStore() { StoreId = storeid };
             //Store hi = new ViewModelStoreProduct();
-            Task<List<ViewModelProduct>> productss = _storerepo.getPastOrdersStoreAsync( s);
+            Task<List<ViewModelAll>> productss = _storerepo.getPastOrdersStoreAsync( s);
             //do stuff
             _logger.LogInformation("\n\nThere was a problem in the ViewModelProduct Detailspast method.\n\n");
 
             //do more stuff
 
-            List<ViewModelProduct> products1 = await productss;
+            List<ViewModelAll> products1 = await productss;
             return products1;
         }
 

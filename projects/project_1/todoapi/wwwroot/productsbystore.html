@@ -26,7 +26,7 @@
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="Store.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#!">All Products</a></li>
                             <li><hr class="dropdown-divider" /></li>
@@ -39,18 +39,36 @@
                     <button class="btn btn-outline-dark" type="submit">
                         <i class="bi-cart-fill me-1"></i>
                         Cart
-                        <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                        <span class="badge bg-dark text-white ms-1 rounded-pill">
+                            <span id="countercart"></span>
+                            <script>
+                                var x = sessionStorage.getItem("counter");
+                                if (x === null) {
+                                    x = 0;
+                                }
+                                document.getElementById("countercart").innerHTML = x;
+                            </script>
+
+                        </span>
                     </button>
                 </form>
             </div>
         </div>
     </nav>
     <!-- Header-->
-    <header class="bg-dark py-5">
+    <header class="bg-secondary py1">
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-white">
-                <h1 class="display-4 fw-bolder">
-                    Welcome to your store app.
+                <h1 id="StorebyName" class="display-4 fw-bolder">
+
+                    <script>
+
+
+                        var x = JSON.parse(localStorage.getItem("sessionStorage.storeName"));
+
+                        document.getElementById("StorebyName").innerHTML = sessionStorage.storeName;
+                    </script>
+
                 </h1>
                 <p class="lead fw-normal text-white-50 mb-0">Shop in style</p>
             </div>
@@ -58,14 +76,13 @@
     </header>
     <!-- <button onclick="alert(sessionStorage.getItem('id'))">Check Session Value</button>-->
     <!-- Section-->
-    <section class="py-5">
+    <section class="">
         <div class="container px-4 px-lg-5 mt-5">
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center listofstoreproducts jsonpostaddtocart">
-                <!--<div class="col mb-5 listofstores">
-                </div>-->
-
-
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center listofstoreproducts">
             </div>
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center listofstoreproductsbutton jsonpostaddtocart">
+            </div>
+
         </div>
     </section>
     <footer class="py-5 bg-dark">
@@ -73,6 +90,7 @@
     </footer>
     <!--<button onclick="alert(sessionStorage.getItem('id'))">Check Session Value</button>-->
     <script src="js/listofstoreproducts.js"></script>
+    <script src="js/listofstoreproductsbutton.js"></script>
     <script src="js/AddtoCart.js"></script>
 
 </body>
