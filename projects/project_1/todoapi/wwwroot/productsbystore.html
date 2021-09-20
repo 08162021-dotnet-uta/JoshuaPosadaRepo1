@@ -36,21 +36,22 @@
                     </li>
                 </ul>
                 <form class="d-flex">
-                    <button class="btn btn-outline-dark" type="submit">
-                        <i class="bi-cart-fill me-1"></i>
-                        Cart
-                        <span class="badge bg-dark text-white ms-1 rounded-pill">
-                            <span id="countercart"></span>
-                            <script>
-                                var x = sessionStorage.getItem("counter");
-                                if (x === null) {
-                                    x = 0;
-                                }
-                                document.getElementById("countercart").innerHTML = x;
-                            </script>
+                    <a href="Cart.html" class="btn btn-outline-dark py-1">
 
-                        </span>
-                    </button>
+                    <i class="bi-cart-fill me-1"></i>
+                    Cart
+                    <span class="badge bg-dark text-white ms-1 rounded-pill">
+                        <span id="countercart"></span>
+                        <script>
+                            var x = sessionStorage.getItem("counter");
+                            if (x === null) {
+                                x = 0;
+                            }
+                            document.getElementById("countercart").innerHTML = x;
+                        </script>
+
+                    </span>
+                    </a>
                 </form>
             </div>
         </div>
@@ -78,7 +79,7 @@
     <!-- Section-->
     <section class="">
         <div class="container px-4 px-lg-5 mt-5">
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center listofstoreproducts">
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center listofstoreproducts jsonpostaddtocart">
             </div>
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center listofstoreproductsbutton jsonpostaddtocart">
             </div>
@@ -90,7 +91,7 @@
     </footer>
     <!--<button onclick="alert(sessionStorage.getItem('id'))">Check Session Value</button>-->
     <script src="js/listofstoreproducts.js"async></script>
-    <script src="js/listofstoreproductsbutton.js"async></script>
+    <!--//<script src="js/listofstoreproductsbutton.js"async></script>-->
     <script src="js/AddtoCart.js" ></script>
 
 </body>

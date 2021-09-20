@@ -24,7 +24,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DemoStoreDbContext\Project1.StoreApplication.Domain.csproj" />
     <ProjectReference Include="..\ModelsLayer\ModelsLayer.csproj" />
-    <ProjectReference Include="..\StoreBusinessLayer\StoreBusinessLayer.csproj" />
+    <ProjectReference Include="..\StoreBusinessLayer\Project1.StoreApplication.Storage.csproj" />
   </ItemGroup>
 
 

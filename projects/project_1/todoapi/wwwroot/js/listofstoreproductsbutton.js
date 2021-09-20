@@ -35,7 +35,7 @@ function addhandlestoreproducts() {
 					lop.innerHTML += `
 			           
 			                    
-			                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent outofstock">
+			                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent outofstock" onmouseover="sessionStorage.ProductPrice=${data[x].productPrice}">
                 <div class="text-center outofstock"><a class="btn btn-outline-dark mt-auto  " href="Store.html"><div id="${data[x].productId}" onClick="sessionStorage.productid=${data[x].productId}">Add To Cart</div></a></div>
 
 			               

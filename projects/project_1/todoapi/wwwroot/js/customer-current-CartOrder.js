@@ -11,26 +11,24 @@ async function loadPre () {
 			const lop = document.querySelector('.customerpastorderPerstore');
 			var totalprice = 0;
 
-			for (let x = 0; x < data.length; x++) {
-				totalprice += data[x].productPrice;
+			for (let x = 0; x < sessionStorage.counter; x++) {
+				var user = JSON.parse(localStorage.getItem('cart' + parseInt(x+1)));
+				console.log(user);
+				totalprice += parseFloat(user.ProductPrice,2);
 				lop.innerHTML += `
 					<tr >
-						<td>${data[x].orderId}</td>
-						<td>${data[x].storeName}</td>
-				
-						<td>${data[x].productName}</td>
-						<td>$${data[x].productPrice}</td>
+						<td>${user.OrderId}</td>
+						<td>${user.StoreName}</td>
+						<td>${user.ProductName}</td>
+						<td>$${user.ProductPrice}</td>
 					</tr>`;
 			}
 			lop.innerHTML += `
 				<tr >
 						<td></td>
 						<td></td>
-						<td></td>
-						
-						<td></td>
 						<td>Total Spent:</td>
-						<td><Strong> $${totalprice}</Strong></td>
+						<td><Strong> $${totalprice.toFixed(2)}</Strong></td>
 					</tr>`;
 
 		});
