@@ -87,10 +87,10 @@ namespace DemoStoreBusinessLayer
 			StoresProduct spid = await _context.StoresProducts.FromSqlRaw<StoresProduct>($"SELECT * FROM StoresProduct Where StoreguidId ='{guid}'").FirstOrDefaultAsync();
 			if (spid == null) return null;
 
-            //DateTime dt = DateTime.Now;
+            DateTime dt = DateTime.Now;
             Console.WriteLine("Task<viewModeAll> vaPurchase in CustomerRepository has hard coded datetime");
             //string hi = dt.ToString("yyyy-MM-ddTHH:mm:sssZ");
-            int io1 = await _context.Database.ExecuteSqlRawAsync("INSERT INTO ItemizedOrders(OrderId,CustomerId,StoreProductId,ProductId,OrderDate) VALUES ({0},{1},{2},{3},{4})", guid, vmva.CustomerId, spid.StoreProductId, vmva.ProductId, vmva.OrderDate);//  DateTime.Now *** COULD NOT GET DATETIME TO WORK
+            int io1 = await _context.Database.ExecuteSqlRawAsync("INSERT INTO ItemizedOrders(OrderId,CustomerId,StoreProductId,ProductId,OrderDate) VALUES ({0},{1},{2},{3},{4})", guid, vmva.CustomerId, spid.StoreProductId, vmva.ProductId, dt.ToString("yyyy-MM-ddTHH:mm:sssZ"));//  DateTime.Now *** COULD NOT GET DATETIME TO WORK
 			if (io1 != 1) return null;
 			ItemizedOrder io2 = await _context.ItemizedOrders.FromSqlRaw<ItemizedOrder>($"SELECT * FROM  ItemizedOrders WHERE OrderId = '{guid}' ").FirstOrDefaultAsync();// default is NULL
 			if (io2 == null) return null;
