@@ -222,11 +222,7 @@ namespace DemoStoreBusinessLayer
 
 			return vmc;
 		}
-		/// <summary>
-		/// Hacky Something is happening wiht the List. It produces a double of what ever is on the database in mcsa
-		/// </summary>
-		/// <param name="vmcC"></param>
-		/// <returns></returns>
+
 		public async Task<List<ViewModelAll>> getPastOrdersviewallAsync(ViewModelCustomer vmcC)
 		{
 			ViewModelAll hi = new ViewModelAll();
@@ -247,6 +243,7 @@ namespace DemoStoreBusinessLayer
 				 orderby e.OrderDate ascending
 				 select new 
 				 {
+
 					 ProductName = pro.ProductName,
 					 ProductDescription = pro.ProductDescription,
 					 ProductPrice = pro.ProductPrice,
@@ -257,12 +254,13 @@ namespace DemoStoreBusinessLayer
 					 StoreProductId = e.StoreProductId,
 					 Customerid = e.CustomerId,
 					 StoreName = s.StoreName
+
 					 
-				 }).ToListAsync();
-				var hi2 =await mcsa;
-				foreach (var p in hi2)
+				 }).Distinct().ToListAsync();
+
+				foreach (var p in await mcsa)
 				{
-					//Console.WriteLine(p.ProductPrice);
+
 					hi = new ViewModelAll();
 					hi.ProductName = p.ProductName;
 					hi.ProductDescription = p.ProductDescription;
@@ -274,7 +272,8 @@ namespace DemoStoreBusinessLayer
 					hi.StoreProductId = p.StoreProductId;
 					hi.CustomerId = p.Customerid;
 					hi.StoreName = p.StoreName;
-					hiList.Add(hi);
+                    hiList.Add(hi);
+
 				}
 
 			}
@@ -347,24 +346,30 @@ namespace DemoStoreBusinessLayer
 					 Customerid = e.CustomerId,
 					 StoreName = s.StoreName
 
-				 }).ToListAsync();
-
-				foreach (var p in await mcsa)
+				 }).Distinct().ToListAsync();
+			
+					foreach (var p in await mcsa)
 				{
-					//Console.WriteLine(p.ProductPrice);
-					hi = new ViewModelAll();
-					hi.ProductName = p.ProductName;
-					hi.ProductDescription = p.ProductDescription;
-					hi.ProductPrice = p.ProductPrice;
-					hi.ProductQuantity = p.ProductQuantity;
-					hi.ProductId = p.ProductId;
-					hi.OrderDate = p.OrderDate;
-					hi.OrderId = p.OrderId;
-					hi.StoreProductId = p.StoreProductId;
-					hi.CustomerId = p.Customerid;
-					hi.StoreName = p.StoreName;
-					hiList.Add(hi);
-				}
+					var testbool = 1;
+                    //Console.WriteLine(p.ProductPrice);
+                    hi = new ViewModelAll();
+                    hi.ProductName = p.ProductName;
+                    hi.ProductDescription = p.ProductDescription;
+                    hi.ProductPrice = p.ProductPrice;
+                    hi.ProductQuantity = p.ProductQuantity;
+                    hi.ProductId = p.ProductId;
+                    hi.OrderDate = p.OrderDate;
+                    hi.OrderId = p.OrderId;
+                    hi.StoreProductId = p.StoreProductId;
+                    hi.CustomerId = p.Customerid;
+                    hi.StoreName = p.StoreName;
+                    //if (testbool<=1)
+                    //               {
+                    //	hiList.Add(hi);
+                    //	testbool--;
+                    //}
+
+                }
 			}
 			return hiList;
 
