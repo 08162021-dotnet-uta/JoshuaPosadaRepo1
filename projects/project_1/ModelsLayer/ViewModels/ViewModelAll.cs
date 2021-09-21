@@ -7,15 +7,15 @@ namespace _08162021batchDemoStore
 {
 	public class ViewModelAll
 	{
-		public IEnumerable<Product> ViewModelProducts { get; set; }
-        public IEnumerable<Store> ViewModelStores { get; set; }
-		public IEnumerable<ItemizedOrder> ViewModelItemizedOrder { get; set; }
-        public Tuple<List<Product>, List<ItemizedOrder>, List<Store>> getall { get;
-			//{
-			//	//ViewModelProducts = List<Product> v;ValueTuple
+		//public IEnumerable<Product> ViewModelProducts { get; set; }
+  //      public IEnumerable<Store> ViewModelStores { get; set; }
+		//public IEnumerable<ItemizedOrder> ViewModelItemizedOrder { get; set; }
+  //      public Tuple<List<Product>, List<ItemizedOrder>, List<Store>> getall { get;
+		//	//{
+		//	//	//ViewModelProducts = List<Product> v;ValueTuple
 
-			//} 
-			set; }
+		//	//} 
+		//	set; }
         private string fname;
 
 		[StringLength(20, MinimumLength = 1)]

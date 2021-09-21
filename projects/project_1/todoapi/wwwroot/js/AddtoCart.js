@@ -55,6 +55,8 @@ function addhandlerorsomething() {
    
 
     })
+        sessionStorage.removeItem('ProductName');
+         sessionStorage.removeItem('ProductPrice');
 };
 
 

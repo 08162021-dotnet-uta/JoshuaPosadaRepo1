@@ -35,6 +35,23 @@ namespace Project1.StoreApplication.Storage.Controllers
 			return View();
 
 		}
+
+
+		[HttpPost("purchase")]
+		public async Task<ActionResult<ViewModelItemizedOrder>> purchaseIO(ViewModelItemizedOrder c)
+		{
+			if (!ModelState.IsValid) return BadRequest();
+
+
+			//send fname and lname into a method of the business layer to check the Db fo that guy/gal;
+			ViewModelItemizedOrder c1 = await _customerrepo.ioPurchase(c);
+            if (c1 == null)
+            {
+                return NotFound();
+            }
+
+            return Created($"~purchaseItemOrder/{c1.OrderId}", c1);
+		}
 		// GET: CustomerController/Create - this is the route for conventional routing 
 		// Attribute routing involves using attributes to define the path
 		[HttpPut("customercreate/{id}")]

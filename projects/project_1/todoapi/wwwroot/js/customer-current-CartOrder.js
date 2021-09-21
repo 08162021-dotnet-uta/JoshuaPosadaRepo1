@@ -30,7 +30,8 @@ async function loadPre () {
 						<td>Total Spent:</td>
 						<td><Strong> $${totalprice.toFixed(2)}</Strong></td>
 					</tr>`;
-
+	
 		});
 
 };
+

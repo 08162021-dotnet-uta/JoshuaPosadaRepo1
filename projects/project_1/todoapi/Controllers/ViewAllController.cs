@@ -61,7 +61,21 @@ namespace StoreDemoUi.Controllers
 
 		}
 
+		[HttpPost("purchasevA")]
+		public async Task<ActionResult<ViewModelAll>> purchaseVAalll (ViewModelAll c)
+		{
+			if (!ModelState.IsValid) return BadRequest();
 
+
+            //send fname and lname into a method of the business layer to check the Db fo that guy/gal;
+            ViewModelAll c1 = await _customerrepo.vaPurchase(c);
+            if (c1 == null)
+            {
+                return NotFound();
+            }
+
+            return Created($"~purchaseVmAll/{c.ProductId}", c);
+		}
 
 
 		// GET: CustomerController/Create - this is the route for conventional routing 

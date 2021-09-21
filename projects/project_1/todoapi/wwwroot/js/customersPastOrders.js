@@ -10,15 +10,17 @@ async function loadPre () {
 			console.log(data)
 			const lop = document.querySelector('.customerpastorderPerstore');
 			var totalprice = 0;
-
-			for (let x = 0; x < data.length; x++) {
+			//Hacky solition of x=x+2 Explained in the Customer Repository  Task<List<ViewModelAll>> getPastOrdersviewallAsync  Documentation
+			for (let x = 0; x < data.length; x=x+2) {
 				totalprice += data[x].productPrice;
+				console.log(data[x]);
 				lop.innerHTML += `
 					<tr >
 						<td>${data[x].orderId}</td>
 						<td>${data[x].storeName}</td>
-				
-						<td>${data[x].productName}</td>
+							<td>${data[x].orderDate}</td>
+			<td>${data[x].productName}</td>
+						<td>${data[x].productDescription}</td>
 						<td>$${data[x].productPrice}</td>
 					</tr>`;
 			}
