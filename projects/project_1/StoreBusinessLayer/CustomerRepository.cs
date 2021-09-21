@@ -365,7 +365,7 @@ namespace DemoStoreBusinessLayer
                     hi.StoreName = p.StoreName;
                     //if (testbool<=1)
                     //               {
-                    //	hiList.Add(hi);
+                    hiList.Add(hi);
                     //	testbool--;
                     //}
 
