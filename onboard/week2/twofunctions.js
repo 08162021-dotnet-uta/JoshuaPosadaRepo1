@@ -39,3 +39,10 @@ function getVowelSubstrings() {
   Aarray.sort();
   return Aarray;
 }
+
+function redundant() {
+  return f1(arguments[0])
+}
+function f1() {
+  return arguments[0]
+}
